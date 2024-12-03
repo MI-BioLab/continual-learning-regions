@@ -1,5 +1,4 @@
 import os
-import torch 
 
 from avalanche.training.plugins import EvaluationPlugin
 from avalanche.evaluation.metrics import (forgetting_metrics, 

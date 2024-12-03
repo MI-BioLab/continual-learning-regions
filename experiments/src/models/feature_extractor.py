@@ -18,7 +18,7 @@ def _get_resnet(model):
 
 def _get_resnet_places(state_dict_file: str, 
                       name: str):
-    model = torch.hub.load("pytorch/vision:v0.10.0", name, pretrained=False)
+    model = torch.hub.load("pytorch/vision:v0.10.0", name, weights=None)
     model.fc = nn.Linear(model.fc.in_features, 365)
     model.load_state_dict(torch.load(state_dict_file))
     return _get_resnet(model), model.fc.in_features

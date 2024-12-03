@@ -1,6 +1,5 @@
 from typing import Optional, TYPE_CHECKING
 
-from torch.utils.data import DataLoader
 from avalanche.benchmarks.utils.data_loader import ReplayDataLoader
 from avalanche.training.plugins.strategy_plugin import SupervisedPlugin
 from avalanche.training.storage_policy import (
