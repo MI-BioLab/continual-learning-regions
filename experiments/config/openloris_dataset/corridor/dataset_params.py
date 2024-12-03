@@ -1,7 +1,7 @@
 import os
 
 def get_dataset_params():
-    root = "/mnt/e/OpenLoris/corridor"
+    root = "/mnt/e/OpenLoris/corridor" #TODO CHANGE
     train_sequences = ["corridor1",
                        "corridor3",
                        "corridor4"]
