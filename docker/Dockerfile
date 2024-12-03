@@ -134,9 +134,13 @@ RUN /bin/bash -c "cd ~/SLAM/libraries && \
                  cmake .. && \
                  make install"
 
-RUN /bin/bash -c "cd ~/SLAM/programs && \
-                 git clone https://github.com/scumatteo/rtabmap.git && \
-                 cd rtabmap && \
+RUN /bin/bash -c "cd ~/ && \
+                 git clone https://github.com/MI-BioLab/continual-learning-regions.git && \
+                 cp continual-learning-regions/rtabmap ~/SLAM/programs && \
+                 cp continual-learning-regions/rtabmap_ros ~/catkin_ws/src && \
+                 rm -rf ~/continual-learning-regions"
+
+RUN /bin/bash -c "cd ~/SLAM/programs/rtabmap && \
                  cd build && \
                  cmake -DOpenCV_DIR=/usr/local/lib/cmake/opencv4 .. && \
                  make -j4 && \
@@ -151,9 +155,7 @@ RUN /bin/bash -c "cd ~/catkin_ws/src && \
                  . /opt/ros/melodic/setup.bash && \
                  catkin_make -j4"
 
-RUN /bin/bash -c "cd ~/catkin_ws/src && \
-                 git clone https://github.com/scumatteo/rtabmap_ros.git && \
-                 cd rtabmap_ros && \
+RUN /bin/bash -c "cd ~/catkin_ws/src/rtabmap_ros && \
                  . /opt/ros/melodic/setup.bash && \
                  cd ~/catkin_ws && \
                  catkin_make -DOpenCV_DIR=/usr/local/lib/cmake/opencv4 -DRTABMAP_SYNC_MULTI_RGBD=ON -DRTABMAP_SYNC_USER_DATA=ON -j4"

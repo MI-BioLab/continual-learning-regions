@@ -1,0 +1,64 @@
+<launch>
+  <param name="use_sim_time" type="bool" value="false"/>
+
+  <!-- Choose visualization -->
+  <arg name="rtabmapviz"              default="true" />
+  <arg name="rviz"                    default="false" />
+
+  <!-- Localization-only mode -->
+  <arg name="localization"            default="false"/>
+
+  <!-- Corresponding config files -->
+  <arg name="rtabmapviz_cfg"          default="~/.ros/rtabmap_GUI.ini" />
+  <arg name="rviz_cfg"                default="$(find rtabmap_launch)/launch/config/rgbd.rviz" />
+
+  <arg name="database_path"           default="/wsl/rtabmap_gta.db"/>
+
+  <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
+    <!-- <arg name="launch_prefix"               value="xterm -e gdb -ex run -\-args"/> -->
+    <arg name="rtabmap_viz"                 value="$(arg rtabmapviz)" />
+    <arg name="rviz"                        value="$(arg rviz)" />
+    <arg name="localization"                value="$(arg localization)"/>
+    <arg name="gui_cfg"                     value="$(arg rtabmapviz_cfg)" />
+    <arg name="rviz_cfg"                    value="$(arg rviz_cfg)" />
+    <arg name="database_path"               value="$(arg database_path)"/>
+    <arg name="queue_size"                  value="100" />
+    <!-- <arg name="subscribe_scan"              value="true"/>
+    <arg name="scan_topic"                  value="/scan"/>
+    <arg name="odom_topic"                  value="/odom"/> -->
+    <arg name="approx_sync"                 value="true"/>
+    <arg name="rgb_topic"                   value="/camera/rgb/image_raw"/>
+    <arg name="depth_topic"                 value="/camera/depth_registered/image_raw"/>
+    <arg name="camera_info_topic"           value="/camera/rgb/camera_info"/>
+    <arg name="depth_camera_info_topic"     value="/camera/depth_registered/camera_info"/>
+    <arg name="visual_odometry"             value="true"/>
+    <arg name="args"                        value="-d --udebug --logfile /wsl/log_gta.txt 
+                                                  --Reg/Strategy 0
+                                                  --Rtabmap/LoopThr 0.7
+                                                  --Mem/InitWMWithAllNodes true
+                                                  --Rtabmap/CreateIntermediateNodes false
+                                                  --Rtabmap/DetectionRate 1     
+                                                  --Mem/NotLinkedNodesKept false
+                                                  --Mem/IntermediateNodeDataKept false
+                                                  --RGBD/NeighborLinkRefining true" />
+
+                                                  <!-- -\-Region/DesiredAverageCardinality 100
+                                                  -\-Region/MeshShapeFactor 1
+                                                  -\-Region/RadiusUpperBound 15
+                                                  -\-Continual/TopK 3
+                                                  -\-Continual/ModelPath /wsl/resnet18_places365.pt
+                                                  -\Continual/CheckpointPath /wsl/checkpoint_openloris.pt
+                                                  -\-Continual/Device 0
+                                                  -\-Continual/Epochs 4
+                                                  -\-Continual/ExperienceSize 500
+                                                  -\-Continual/ReplayMemorySize 500
+                                                  -\-Continual/ReplayMemory 1
+                                                  -\-Continual/BatchSize 64
+                                                  -\-Continual/ReplayMemoryBatchSize 128
+                                                  -\-Continual/WeightingMethod 2
+                                                  -\-Continual/LossFunction 1 -->
+                                            
+
+  </include>
+
+</launch>

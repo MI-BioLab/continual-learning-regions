@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>rtabmap_legacy</name>
+  <version>0.21.1</version>
+  <description>RTAB-Map's legacy launch files.</description>
+  <maintainer email="matlabbe@gmail.com">Mathieu Labbe</maintainer>
+  <author>Mathieu Labbe</author>
+  <license>BSD</license>
+  <url type="bugtracker">https://github.com/introlab/rtabmap_ros/issues</url>
+  <url type="repository">https://github.com/introlab/rtabmap_ros</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_export_depend>rtabmap_conversions</build_export_depend>
+  <build_export_depend>rtabmap_msgs</build_export_depend>
+
+  <build_depend>dynamic_reconfigure</build_depend>
+  <build_depend>image_transport</build_depend>
+  <build_depend>rtabmap_conversions</build_depend>
+  <build_depend>rtabmap_msgs</build_depend>
+  <build_depend>rtabmap_util</build_depend>
+
+  <exec_depend>dynamic_reconfigure</exec_depend>
+  <exec_depend>image_transport</exec_depend>
+  <exec_depend>nodelet</exec_depend>
+  <exec_depend>rtabmap_conversions</exec_depend>
+  <exec_depend>rtabmap_demos</exec_depend>
+  <exec_depend>rtabmap_launch</exec_depend>
+  <exec_depend>rtabmap_msgs</exec_depend>
+  <exec_depend>rtabmap_odom</exec_depend>
+  <exec_depend>rtabmap_slam</exec_depend>
+  <exec_depend>rtabmap_viz</exec_depend>
+  <exec_depend>rtabmap_util</exec_depend>
+  
+  <export>
+    <nodelet plugin="${prefix}/nodelet_plugins.xml" />
+  </export>
+
+</package>

@@ -1,0 +1,70 @@
+<launch>
+  <param name="use_sim_time" type="bool" value="true"/>
+
+  <!-- Choose visualization -->
+  <arg name="rtabmapviz"              default="true" />
+  <arg name="rviz"                    default="false" />
+
+  <!-- Localization-only mode -->
+  <arg name="localization"            default="false"/>
+
+  <!-- Corresponding config files -->
+  <arg name="rtabmapviz_cfg"          default="~/.ros/rtabmap_GUI.ini" />
+  <arg name="rviz_cfg"                default="$(find rtabmap_launch)/launch/config/rgbd.rviz" />
+
+  <arg name="frame_id"                default="base_link"/>     <!-- Fixed frame id, you may set "base_link" or "base_footprint" if they are published -->
+  <arg name="database_path"           default="/wsl/rtabmap_openloris.db"/>
+
+  <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
+    <!-- <arg name="launch_prefix"               value="xterm -e gdb -ex run -\-args"/> -->
+    <arg name="rtabmap_viz"                 value="$(arg rtabmapviz)" />
+    <arg name="rviz"                        value="$(arg rviz)" />
+    <arg name="localization"                value="$(arg localization)"/>
+    <arg name="gui_cfg"                     value="$(arg rtabmapviz_cfg)" />
+    <arg name="rviz_cfg"                    value="$(arg rviz_cfg)" />
+    <arg name="database_path"               value="$(arg database_path)"/>
+    <arg name="queue_size"                  value="10" />
+    <arg name="frame_id"                    value="base_link"/>
+    <!-- <arg name="subscribe_scan"              value="true"/>
+    <arg name="scan_topic"                  value="/scan"/>
+    <arg name="odom_topic"                  value="/odom"/> -->
+    <arg name="approx_sync"                 value="true"/>
+    <arg name="rgb_topic"                   value="/color/image_raw"/>
+    <arg name="depth_topic"                 value="/aligned_depth_to_color/image_raw"/>
+    <arg name="camera_info_topic"           value="/color/camera_info"/>
+    <arg name="depth_camera_info_topic"     value="/aligned_depth_to_color/camera_info"/>
+    <arg name="visual_odometry"             value="true"/>
+    <arg name="args"                        value="--udebug --logfile /wsl/log_openloris.txt 
+                                                  --Reg/Strategy 0
+                                                  --Rtabmap/LoopThr 0.1
+                                                  --Rtabmap/MemoryThr 177
+                                                  --Mem/InitWMWithAllNodes true
+                                                  --Rtabmap/CreateIntermediateNodes false
+                                                  --Rtabmap/DetectionRate 1     
+                                                  --Mem/NotLinkedNodesKept false
+                                                  --Mem/IntermediateNodeDataKept false
+                                                  --RGBD/NeighborLinkRefining true" />
+                                                  <!-- -\-Region/DesiredAverageCardinality 100
+                                                  -\-Region/MeshShapeFactor 1
+                                                  -\-Region/RadiusUpperBound 15
+                                                  -\-Continual/TopK 3
+                                                  -\-Continual/ModelPath /wsl/resnet18_places365.pt
+                                                  -\-Continual/CheckpointPath /wsl/checkpoint_openloris.pt
+                                                  -\-Continual/Device 0
+                                                  -\-Continual/Epochs 4
+                                                  -\-Continual/ExperienceSize 500
+                                                  -\-Continual/ReplayMemorySize 500
+                                                  -\-Continual/ReplayMemory 1
+                                                  -\-Continual/BatchSize 64
+                                                  -\-Continual/ReplayMemoryBatchSize 128
+                                                  -\-Continual/WeightingMethod 2
+                                                  -\-Continual/LossFunction 1"  /> -->
+                                            
+
+  </include>
+
+<node pkg="tf2_ros" type="static_transform_publisher" name="base_to_camera_broadcaster" args="0.226483684909 -0.0511419403565 0.916 -0.496762299683 0.499879588713 -0.495106812694 0.508150428935 base_link d400_color" />
+<node pkg="tf2_ros" type="static_transform_publisher" name="base_to_laser_broadcaster" args="0.14350911105 -0.0964248846142 0.998048618989 0.00794676373317 0.011876376472 -0.7075455983 0.706339121032 base_link laser" />
+<!-- <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_odom_broadcaster" args="0 0 0 0 0 0 base_link base_odom" /> -->
+
+</launch>

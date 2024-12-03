@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+
+<launch>
+   <!-- Backward compatibility launch file, use "rtabmap.launch rgbd:=false stereo:=true" instead -->
+
+   <!-- Your camera should be calibrated and publishing rectified left and right
+        images + corresponding camera_info msgs. You can use stereo_image_proc for image rectification.
+        Example:
+           $ roslaunch rtabmap_ros bumblebee.launch -->
+
+  <param name="use_sim_time" type="bool" value="true"/>
+
+  <!-- Choose visualization -->
+  <arg name="rtabmapviz"              default="true" />
+  <arg name="rviz"                    default="false" />
+
+  <!-- Localization-only mode -->
+  <arg name="localization"            default="false"/>
+
+  <!-- Corresponding config files -->
+  <arg name="rtabmapviz_cfg"          default="~/.ros/rtabmap_GUI.ini" />
+  <arg name="rviz_cfg"                default="$(find rtabmap_launch)/launch/config/rgbd.rviz" />
+
+  <arg name="frame_id"                default="base_link"/>     <!-- Fixed frame id, you may set "base_link" or "base_footprint" if they are published -->
+  <arg name="database_path"           default="/wsl/rtabmap_kitti.db"/>
+  <arg name="rtabmap_args"            default="-d
+                                              --udebug --logfile /wsl/log_kitti.txt 
+                                              --Rtabmap/LoopThr 0.05
+                                              --Rtabmap/MemoryThr 82
+                                              --Mem/InitWMWithAllNodes true
+                                              --Rtabmap/CreateIntermediateNodes false
+                                              --Rtabmap/DetectionRate 1     
+                                              --Mem/NotLinkedNodesKept false
+                                              --Mem/IntermediateNodeDataKept false
+                                              --RGBD/NeighborLinkRefining true" />
+                                              <!-- -\-Region/DesiredAverageCardinality 600
+                                              -\-Region/MeshShapeFactor 1
+                                              -\-Region/RadiusUpperBound 100
+                                              -\-Continual/TopK 3
+                                              -\-Continual/ModelPath /wsl/resnet18_places365.pt
+                                              -\-Continual/CheckpointPath /wsl/checkpoint_kitti.pt
+                                              -\-Continual/Device 0
+                                              -\-Continual/Epochs 4
+                                              -\-Continual/ExperienceSize 500
+                                              -\-Continual/ReplayMemorySize 500
+                                              -\-Continual/ReplayMemory 1
+                                              -\-Continual/BatchSize 64
+                                              -\-Continual/ReplayMemoryBatchSize 128
+                                              -\-Continual/WeightingMethod 2
+                                              -\-Continual/LossFunction 1"/>    -->
+
+  <!-- <arg name="launch_prefix"           default="xterm -e gdb -ex run -\-args"/>                                   -->
+  <arg name="launch_prefix"           default=""/>
+  <arg name="approx_sync"             default="true"/>         <!-- if timestamps of the input topics are not synchronized -->
+
+  <arg name="left_image_topic"        default="/kitti/camera_color_left/image_rect" />
+  <arg name="right_image_topic"       default="/kitti/camera_color_right/image_rect" />      <!-- using grayscale image for efficiency -->
+  <arg name="left_camera_info_topic"  default="/kitti/camera_color_left/camera_info" />
+  <arg name="right_camera_info_topic" default="/kitti/camera_color_right/camera_info" />
+  <arg name="compressed"              default="false"/>
+
+  <arg name="subscribe_scan"          default="false"/>         <!-- Assuming 2D scan if set, rtabmap will do 3DoF mapping instead of 6DoF -->
+  <arg name="scan_topic"              default="/scan"/>
+
+  <arg name="subscribe_scan_cloud"    default="false"/>         <!-- Assuming 3D scan if set -->
+  <arg name="scan_cloud_topic"        default="/scan_cloud"/>
+
+  <arg name="visual_odometry"         default="true"/>          <!-- Generate visual odometry -->
+  <arg name="odom_topic"              default="/odom"/>         <!-- Odometry topic used if visual_odometry is false -->
+  <arg name="odom_frame_id"           default=""/>              <!-- If set, TF is used to get odometry instead of the topic -->
+
+  <arg name="namespace"               default="rtabmap"/>
+  <arg name="wait_for_transform"      default="0.2"/>
+
+  <arg name="output"                  default="screen"/>
+
+  <include file="$(find rtabmap_launch)/launch/rtabmap.launch">
+    <arg name="stereo"                  value="true"/>
+    <arg name="rtabmap_viz"             value="$(arg rtabmapviz)" />
+    <arg name="rviz"                    value="$(arg rviz)" />
+    <arg name="localization"            value="$(arg localization)"/>
+    <arg name="gui_cfg"                 value="$(arg rtabmapviz_cfg)" />
+    <arg name="rviz_cfg"                value="$(arg rviz_cfg)" />
+
+    <arg name="frame_id"                value="$(arg frame_id)"/>
+    <arg name="namespace"               value="$(arg namespace)"/>
+    <arg name="database_path"           value="$(arg database_path)"/>
+    <arg name="wait_for_transform"      value="$(arg wait_for_transform)"/>
+    <arg name="rtabmap_args"            value="$(arg rtabmap_args)"/>
+    <arg name="launch_prefix"           value="$(arg launch_prefix)"/>
+    <arg name="approx_sync"             value="$(arg approx_sync)"/>
+    <arg name="output"                  value="$(arg output)" />
+
+    <arg name="left_image_topic"        value="$(arg left_image_topic)" />
+    <arg name="right_image_topic"       value="$(arg right_image_topic)" />
+    <arg name="left_camera_info_topic"  value="$(arg left_camera_info_topic)" />
+    <arg name="right_camera_info_topic" value="$(arg right_camera_info_topic)" />
+
+    <arg name="compressed"              value="$(arg compressed)"/>
+
+    <arg name="subscribe_scan"          value="$(arg subscribe_scan)"/>
+    <arg name="scan_topic"              value="$(arg scan_topic)"/>
+
+    <arg name="subscribe_scan_cloud"    value="$(arg subscribe_scan_cloud)"/>
+    <arg name="scan_cloud_topic"        value="$(arg scan_cloud_topic)"/>
+
+    <arg name="visual_odometry"         value="$(arg visual_odometry)"/>
+    <arg name="odom_topic"              value="$(arg odom_topic)"/>
+    <arg name="odom_frame_id"           value="$(arg odom_frame_id)"/>
+    <arg name="odom_args"               value="$(arg rtabmap_args)"/>
+  </include>
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_camera_color_left_link_broadcaster"  args="0 0 0 0 0 0 base_link camera_color_left" />
+
+</launch>

@@ -1,0 +1,43 @@
+<launch>
+
+    <node pkg="rtabmap_util" type="odom_msg_to_tf" name="odom_msg_to_tf" output="screen">
+      <remap from="odom" to="/tesse/odom"/>
+      <param name="frame_id" value="odom_link"/>
+      <param name="odom_frame_id" value="gt_odom"/>
+    </node>
+
+  <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
+    <arg name="rtabmapviz"                  value="false" /> 
+    <arg name="rviz"                        value="true" />
+    <arg name="queue_size"                  value="10" />
+    <arg name="use_sim_time"                value="true"/>
+    <arg name="frame_id"                    value="base_link_gt"/>
+    <!-- <arg name="subscribe_scan"              value="true"/>
+    <arg name="scan_topic"                  value="/tesse/front_lidar/scan"/> -->
+    <arg name="approx_sync"                 value="true"/>
+    <arg name="rgb_topic"                   value="/tesse/left_cam/rgb/image_raw"/>
+    <arg name="depth_topic"                 value="/tesse/depth_cam/mono/image_raw"/>
+    <arg name="camera_info_topic"           value="/tesse/left_cam/camera_info"/>
+    <arg name="depth_camera_info_topic"     value="/tesse/depth_cam/camera_info"/>
+    <arg name="visual_odometry"             value="true"/>
+    <arg name="ground_truth_frame_id"       value="gt_odom"/>
+    <arg name="ground_truth_base_frame_id"  value="odom_link"/>
+
+    <arg name="args"                        value=" -d
+                                                    --Reg/Strategy 0
+                                                    --Rtabmap/DetectionRate 1
+                                                    --Rtabmap/CreateIntermediateNodes true
+                                                    --Mem/IntermediateNodeDataKept true
+                                                    --RGBD/NeighborLinkRefining false
+                                                    --Mem/NotLinkedNodesKept false"/>
+                                            
+
+  </include>
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_left_camera_broadcaster" args="0.0 0.05 0.0 0.5 -0.5 0.5 -0.5 base_link_gt left_cam" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_right_camera_broadcaster" args="0.0 -0.05 0.0 0.5 -0.5 0.5 -0.5 base_link_gt right_cam" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_front_lidar_broadcaster" args="0.17 -0.017 0.0 0.0 0.0 0.0 1.0 base_link_gt front_lidar" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_to_rear_lidar_broadcaster" args="-0.17 -0.017 0.0 0.0 0.0 0.0 1.0 base_link_gt rear_lidar" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="world_to_map_lidar_broadcaster" args="0 0 0 0 0 0 1 world map" />
+
+</launch>
