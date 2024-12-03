@@ -11,3 +11,5 @@ Repository for continual learning of regions to enhance loop closure detection a
 
 # Run the experiments
 Inside the *experiments* folder you can change the settings by manipulating the files inside the *config* folder. To run the experiments you can change the *main.py* inside the *src* folder and run it with the command `python src/main.py`
+
+# Run RTAB-Map
