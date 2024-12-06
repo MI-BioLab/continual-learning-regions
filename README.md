@@ -8,6 +8,17 @@ Repository for continual learning of regions to enhance loop closure detection a
 4. Inside the avalanche folder run the command `pip install -e .` to install avalanche adapted for the experiments
 
 # Download the data
+## USyd
+You can download USyd from [here](https://ieee-dataport.org/open-access/usyd-campus-dataset) and follow the instruction from [here](https://gitlab.acfr.usyd.edu.au/its/dataset_metapackage) to use it. We suggest to use docker, you can find an image inside the *docker* folder in this repository.  
+
+## KITTI
+You can download KITTI from [here](https://www.cvlibs.net/datasets/kitti/eval_odometry.php). To run KITTI with rtabmap_ros, you can create the rosbags using this [package](https://github.com/tomas789/kitti2bag).
+
+## OpenLoris-Scene
+You can download OpenLoris-Scene from this [page](https://lifelong-robotic-vision.github.io/dataset/scene.html). To run the experiments you need both the packages and the rosbags.
+
+## St.Lucia Multiple Times of Day
+You can download the ten sequences from [here](https://github.com/arrenglover/openfabmap/wiki/Datasets).
 
 # Run the experiments
 Inside the *experiments* folder you can change the settings by manipulating the files inside the *config* folder. To run the experiments you can change the *main.py* inside the *src* folder and run it with the command `python src/main.py`
@@ -64,17 +75,3 @@ cd ~/catkin_ws/src/rtabmap_ros
 cd ~/catkin_ws 
 catkin_make -DOpenCV_DIR=/usr/local/lib/cmake/opencv4 -DRTABMAP_SYNC_MULTI_RGBD=ON -DRTABMAP_SYNC_USER_DATA=ON -j4
 ``` 
-
-# The datasets
-
-## USyd
-You can download USyd from [here](https://ieee-dataport.org/open-access/usyd-campus-dataset) and follow the instruction from [here](https://gitlab.acfr.usyd.edu.au/its/dataset_metapackage) to use it. We suggest to use docker, you can find an image inside the *docker* folder in this repository.  
-
-## KITTI
-You can download KITTI from [here](https://www.cvlibs.net/datasets/kitti/eval_odometry.php). To run KITTI with rtabmap_ros, you can create the rosbags using this [package](https://github.com/tomas789/kitti2bag).
-
-## OpenLoris-Scene
-You can download OpenLoris-Scene from this [page](https://lifelong-robotic-vision.github.io/dataset/scene.html). To run the experiments you need both the packages and the rosbags.
-
-## St.Lucia Multiple Times of Day
-You can download the ten sequences from [here](https://github.com/arrenglover/openfabmap/wiki/Datasets).
