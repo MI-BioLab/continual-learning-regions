@@ -82,5 +82,6 @@ To run RTAB-Map using ros, move into the *catkin_ws* folder and run the command
 roslaunch rtabmap_examples *launcher_name.launch*
 ```
 
+The launcher files are in the folder *rtabmap_ros/rtabmap_examples/launch/*
 **Attention**: in case of USyd, you need to use *usyd_mono.launch* (that uses only the frontal camera) **NOT** *usyd_dataset.launch* (that uses the three cameras). 
 
