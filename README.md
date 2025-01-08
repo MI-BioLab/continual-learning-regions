@@ -25,6 +25,7 @@ Inside the *experiments* folder you can change the settings by manipulating the 
 
 # Places365
 Inside the folder places365 you can find the weights of Resnet18 and Resnet50 models pretrained on Places365. In our experiments, only Resnet18 weights were used (*places365/resnet18_places365/resnet18_places365.pt*).
+These models were ported into Pytorch from Cafè, if something does not work correctly, please contact us.
 
 # Setup RTAB-Map
 To run RTAB-Map, we used [**Docker**](https://www.docker.com/). Inside the *docker* folder there is a *rtabmap* folder which contains a Dockerfile you can use to build a docker image. See the *docker/README.md* for a step by step guide to build and run the docker image. In docker *rtabmap* folder is under */root/SLAM/programs* (or *~/SLAM/programs*), while *rtabmap_ros* is already inside *~/catkin_ws/src*.
