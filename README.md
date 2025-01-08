@@ -23,7 +23,7 @@ You can download the ten sequences from [here](https://github.com/arrenglover/op
 # Run the experiments
 Inside the *experiments* folder you can change the settings by manipulating the files inside the *config* folder. To run the experiments you can change the *main.py* inside the *src* folder and run it with the command `python src/main.py`
 
-# Run RTAB-Map
+# Setup RTAB-Map
 To run RTAB-Map, we used [**Docker**](https://www.docker.com/). Inside the *docker* folder there is a *rtabmap* folder which contains a Dockerfile you can use to build a docker image. See the *docker/README.md* for a step by step guide to build and run the docker image. In docker *rtabmap* folder is under */root/SLAM/programs* (or *~/SLAM/programs*), while *rtabmap_ros* is already inside *~/catkin_ws/src*.
 
 After run the container, you have to install libtorch C++ (we used libtorch 1.13.1, with CUDA 11.6).
@@ -74,4 +74,13 @@ cd ~/catkin_ws/src/rtabmap_ros
 . /opt/ros/melodic/setup.bash
 cd ~/catkin_ws 
 catkin_make -DOpenCV_DIR=/usr/local/lib/cmake/opencv4 -DRTABMAP_SYNC_MULTI_RGBD=ON -DRTABMAP_SYNC_USER_DATA=ON -j4
-``` 
+```
+
+# Run RTAB-Map
+To run RTAB-Map using ros, move into the *catkin_ws* folder and run the command 
+```
+roslaunch rtabmap_examples *launcher_name.launch*
+```
+
+**Attention**: in case of USyd, you need to use *usyd_mono.launch* (that uses only the frontal camera) **NOT** *usyd_dataset.launch* (that uses the three cameras). 
+
