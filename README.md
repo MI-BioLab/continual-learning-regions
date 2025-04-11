@@ -1,13 +1,13 @@
 # continual-learning-regions
 Repository for continual learning of regions to enhance loop closure detection and relocalization in the context of robotic SLAM.
 
-Click below to watch the video that shows how the clustering algorithm works on USyd dataset
+Click below to see how the clustering algorithm works on 12 sequences of the USyd dataset
 [![frame](https://github.com/user-attachments/assets/704a762e-b76d-4225-9f3e-dae1553e19ed)](https://drive.google.com/file/d/14X8AfpSdNe13rGBi5ihB3xy8rvMf4Fa1/view)
 
-Click below to watch the video that shows how the system works on sequence 00 of the KITTI odometry dataset
+Click below to see how the system works on sequence 00 of the KITTI odometry dataset
 [![frame](https://github.com/user-attachments/assets/d59a7720-c69b-4d6e-9983-52976b8bc586)](https://drive.google.com/file/d/1QtxVlosS_fk-6h8WiWTgpbqnUUIE4jA6/view)
 
-Click below to watch the video that shows how the system works on the 12 sequences of USyd dataset
+Click below to see how the system works on 12 sequences of the USyd dataset
 
 [![frame](https://github.com/user-attachments/assets/1cf97370-5f0c-4dca-9a22-1a9bc816210c)](https://drive.google.com/file/d/1ZsCGBZPAi8MNjn4CuCMiUOuRGOjWu5kN/view)
 
