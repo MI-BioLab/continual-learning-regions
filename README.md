@@ -77,7 +77,7 @@ Now, you can install rtabmap using the following commands:
 cd path/to/rtabmap
 mkdir build
 cd build
-cmake -DOpenCV_DIR=/usr/local/lib/cmake/opencv4 -DCMAKE_PREFIX_PATH=/path/to/libtorch .. 
+cmake -DOpenCV_DIR=/usr/local/lib/cmake/opencv4 -DWITH_TORCH=ON -DCMAKE_PREFIX_PATH=/path/to/libtorch .. 
 make -j4 
 make install
 ```
