@@ -134,11 +134,7 @@ RUN /bin/bash -c "cd ~/SLAM/libraries && \
                  cmake .. && \
                  make install"
 
-RUN /bin/bash -c "cd ~/ && \
-                 git clone https://github.com/MI-BioLab/continual-learning-regions.git && \
-                 cp -r continual-learning-regions/rtabmap ~/SLAM/programs && \
-                 cp -r continual-learning-regions/rtabmap_ros ~/catkin_ws/src && \
-                 rm -rf ~/continual-learning-regions"
+
 
 # RUN /bin/bash -c "cd ~/SLAM/programs/rtabmap && \
 #                  mkdir build && \
@@ -155,6 +151,12 @@ RUN /bin/bash -c "cd ~/catkin_ws/src && \
                  cd ~/catkin_ws/ && \
                  . /opt/ros/melodic/setup.bash && \
                  catkin_make -j4"
+
+RUN /bin/bash -c "cd ~/ && \
+                 git clone https://github.com/MI-BioLab/continual-learning-regions.git && \
+                 cp -r continual-learning-regions/rtabmap ~/SLAM/programs && \
+                 cp -r continual-learning-regions/rtabmap_ros ~/catkin_ws/src && \
+                 rm -rf ~/continual-learning-regions"
 
 # RUN /bin/bash -c "cd ~/catkin_ws/src/rtabmap_ros && \
 #                  . /opt/ros/melodic/setup.bash && \

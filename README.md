@@ -51,8 +51,8 @@ In our experiments, we never used GPU, so if you only want to reproduce the expe
 
 You need to check if your GPU and nvidia drivers are compatible with CUDA 11.6.
 * You can install [CUDA 11.6](https://developer.nvidia.com/cuda-11-6-0-download-archive?target_os=Linux) and [cuDNN 8.9.7](https://developer.nvidia.com/rdp/cudnn-archive) for CUDA 11.x.
-* you can download libtorch-cpu [here](https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-1.13.1%2Bcpu.zip).
-* you can download libtorch with CUDA 11.6 support from [here](https://download.pytorch.org/libtorch/cu116/libtorch-shared-with-deps-1.13.1%2Bcu116.zip)
+* you can download libtorch-cpu [here](https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.13.1%2Bcpu.zip).
+* you can download libtorch with CUDA 11.6 support from [here](https://download.pytorch.org/libtorch/cu116/libtorch-cxx11-abi-shared-without-deps-1.13.1%2Bcu116.zip)
 
 Install everything inside the docker container.
 
