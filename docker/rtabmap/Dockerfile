@@ -10,6 +10,8 @@ RUN apt-get install -y wget
 RUN apt-get install -y x11-xserver-utils
 RUN apt-get install -y mesa-utils
 RUN apt-get install -y software-properties-common
+RUN apt-get install -y unzip
+RUN apt-get install -y git
 RUN echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc 
 RUN source ~/.bashrc
 RUN mkdir -p ~/catkin_ws/src
@@ -167,4 +169,5 @@ RUN ldconfig
 
 RUN apt-get -y update 
 RUN apt-get install -y xterm 
+RUN echo "export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libLLVM-10.so.1" >> ~/.bashrc
 
